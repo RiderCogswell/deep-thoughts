@@ -1,4 +1,4 @@
-import React from 'react'; 
+import React from 'react';
 import { ApolloProvider, ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
@@ -45,7 +45,7 @@ const App = () => {
                 element={<Signup />}
               />
               <Route
-                path="/profile/:username?"
+                path="/profile/:username"
                 element={<Profile />}
               />
               <Route
@@ -64,7 +64,7 @@ const App = () => {
       </Router>
     </ApolloProvider>
   );
-}
+};
 
 
 export default App;
