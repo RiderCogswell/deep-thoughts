@@ -11,7 +11,6 @@ const Home = () => {
   // negates the need to check if an object exists before accessing its properties
   // literally reads = if data exists, store it in the thoughts constant, if not, store an empty array
   const thoughts = data?.thoughts || [];
-  console.log(thoughts);
 
   return (
     <main>

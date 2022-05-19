@@ -10,7 +10,7 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Profile from './pages/Profile';
 import SingleThought from './pages/SingleThought';
-// import NoMatch from './pages/NoMatch';
+import NoMatch from './pages/NoMatch';
 
 const httpLink = createHttpLink({
   // need am absolute path because react runs on port 3000 but the server runs on 3001, so we have to explicitly define its path for development
@@ -45,12 +45,17 @@ const App = () => {
                 element={<Signup />}
               />
               <Route
-                path="/profile"
+                path="/profile/:username?"
                 element={<Profile />}
               />
               <Route
-                path="/thought"
+                path="/thought/:id"
                 element={<SingleThought />}
+              />
+
+              <Route 
+                path='*'
+                element={<NoMatch />}
               />
             </Routes>
           </div>
