@@ -21,6 +21,6 @@
   },
   "homepage": "https://github.com/RiderCogswell/deep-thoughts#readme",
   "devDependencies": {
-    "concurrently": "^7.1.0"
+    "concurrently": "^5.1.0"
   }
 }
