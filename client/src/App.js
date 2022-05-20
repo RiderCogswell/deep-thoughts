@@ -1,5 +1,7 @@
 import React from 'react';
 import { ApolloProvider, ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client'
+// essentially this allows us to create a middleware function see line 24
+import { setContext } from '@apollo/client/link/context'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import Header from './components/Header';
@@ -19,8 +21,22 @@ const httpLink = createHttpLink({
   uri: '/graphql',
 });
 
+// to retrieve the token from localstorage and set the HTTP request headers to include the token
+// the first param is the current request, we dont need it so we use '_' as a placeholder
+const authLink = setContext((_, { headers }) => {
+  const token = localStorage.getItem('id_token');
+  return {
+    // set headers to recieve auth token in proper format
+    headers: {
+      ...headers,
+      authorization: token ? `Bearer ${token}` : '',
+    },
+  };
+})
+
+// update client to include both httpLink and authLink so we can automate that process instead of replacing the token manually every request
 const client = new ApolloClient({
-  link: httpLink,
+  link: authLink.concat(httpLink),
   cache: new InMemoryCache(),
 });
 
@@ -28,28 +44,28 @@ const App = () => {
   return (
     <ApolloProvider client={client}>
       <Router>
-        <div className="flex-column justify-flex-start min-100-vh">
+        <div className='flex-column justify-flex-start min-100-vh'>
           <Header />
-          <div className="container">
+          <div className='container'>
             <Routes>
               <Route
-                path="/"
+                path='/'
                 element={<Home />}
               />
               <Route
-                path="/login"
+                path='/login'
                 element={<Login />}
               />
               <Route
-                path="/signup"
+                path='/signup'
                 element={<Signup />}
               />
               <Route
-                path="/profile/:username"
+                path='/profile/:username'
                 element={<Profile />}
               />
               <Route
-                path="/thought/:id"
+                path='/thought/:id'
                 element={<SingleThought />}
               />
 
