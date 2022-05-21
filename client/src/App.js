@@ -65,6 +65,10 @@ const App = () => {
                 element={<Profile />}
               />
               <Route
+                path='/profile'
+                element={<Profile />}
+              />
+              <Route
                 path='/thought/:id'
                 element={<SingleThought />}
               />

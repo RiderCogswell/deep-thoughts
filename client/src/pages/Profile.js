@@ -18,10 +18,12 @@ const Profile = (props) => {
 
   const user = data?.me || data?.user || {};
 
+
+
   // navigate to persoanl profile page if username is the logged-in users
   // checks if logged in then if the current profile is yours
   if (Auth.loggedIn() && Auth.getProfile().data.username === userParam) {
-    return <Navigate to="/profile" />;
+    return <Navigate to='/profile' />;
   }
 
   if (loading) {
